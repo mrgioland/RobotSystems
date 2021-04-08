@@ -9,10 +9,11 @@ import time
 # set_motor_speed(2, 1)
 # camera_servo_pin.angle(0)
 
-
+print("starting")
 set_dir_servo_angle(0)
 forward(50,0)
 time.sleep(2)
+print("done")
 stop()
 
 
