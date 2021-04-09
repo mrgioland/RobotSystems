@@ -8,12 +8,16 @@ except ImportError:
     from  sim_ezblock  import *
 import time
 import logging
+# from logdecorator import log_on_start, log_on_end, log_on_error
 import atexit
 import math
 
-# logging_format = "%( asctime)s: %( message)s"
-# logging.basicConfig(format=logging_format , level=logging.INFO ,datefmt ="%H:%M:%S")
-# logging.getLogger ().setLevel(logging.DEBUG)
+logging_format = "%(asctime)s: %(message)s"
+logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
+logging.getLogger ().setLevel(logging.DEBUG)
+
+
+
 
 PERIOD = 4095
 PRESCALER = 10
@@ -44,6 +48,9 @@ for pin in motor_speed_pins:
     pin.period(PERIOD)
     pin.prescaler(PRESCALER)
 
+# @log_on_start(logging.DEBUG, "Message when function starts")
+# @log_on_error(logging.DEBUG, "Message when function encounters an error before completing")
+# @log_on_end(logging.DEBUG, "Message when function ends successfully")
 def set_motor_speed(motor, speed):
     global cali_speed_value,cali_dir_value
     motor -= 1
