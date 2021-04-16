@@ -8,8 +8,12 @@ except ImportError:
     from  sim_ezblock  import *
 import time
 import atexit
+from logdecorator import log_on_start, log_on_end, log_on_error
+import math
 
-
+logging_format = "%(asctime)s: %(message)s"
+logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
+logging.getLogger ().setLevel(logging.DEBUG)
 
 class picarxClass():
 
@@ -45,11 +49,17 @@ class picarxClass():
             pin.period(PERIOD)
             pin.prescaler(PRESCALER)
 
+    @log_on_start(logging.DEBUG, "cleanup start")
+    @log_on_error(logging.DEBUG, "cleanup error")
+    @log_on_end(logging.DEBUG, "cleanup end")
     def cleanup(self):
         self.set_dir_servo_angle(0)
         self.set_motor_speed(1,0)
         self.set_motor_speed(2,0)
 
+    @log_on_start(logging.DEBUG, "set_motor_speed start")
+    @log_on_error(logging.DEBUG, "set_motor_speed error")
+    @log_on_end(logging.DEBUG, "set_motor_speed end")
     def set_motor_speed(self, motor, speed):
         motor -= 1
         if speed >= 0:
@@ -67,6 +77,9 @@ class picarxClass():
             self.motor_direction_pins[motor].low()
             self.motor_speed_pins[motor].pulse_width_percent(speed)
 
+    @log_on_start(logging.DEBUG, "motor_speed_calibration start")
+    @log_on_error(logging.DEBUG, "motor_speed_calibration error")
+    @log_on_end(logging.DEBUG, "motor_speed_calibration end")
     def motor_speed_calibration(self, value):
         self.cali_speed_value = value
         if value < 0:
@@ -76,6 +89,9 @@ class picarxClass():
             self.cali_speed_value[0] = abs(self.cali_speed_value)
             self.cali_speed_value[1] = 0
 
+    @log_on_start(logging.DEBUG, "motor_direction_calibration start")
+    @log_on_error(logging.DEBUG, "motor_direction_calibration error")
+    @log_on_end(logging.DEBUG, "motor_direction_calibration end")
     def motor_direction_calibration(self, motor, value):
         # 0: positive direction
         # 1:negative direction
@@ -83,13 +99,22 @@ class picarxClass():
         if value == 1:
             self.cali_dir_value[motor] = -1*self.cali_dir_value[motor]
 
+    @log_on_start(logging.DEBUG, "dir_servo_angle_calibration start")
+    @log_on_error(logging.DEBUG, "dir_servo_angle_calibration error")
+    @log_on_end(logging.DEBUG, "dir_servo_angle_calibration end")
     def dir_servo_angle_calibration(self, value):
         self.dir_cal_value = value
         self.set_dir_servo_angle(self.dir_cal_value)
 
+    @log_on_start(logging.DEBUG, "set_dir_servo_angle start")
+    @log_on_error(logging.DEBUG, "set_dir_servo_angle error")
+    @log_on_end(logging.DEBUG, "set_dir_servo_angle end")
     def set_dir_servo_angle(self, value):
         self.dir_servo_pin.angle(value+self.dir_cal_value)
 
+    @log_on_start(logging.DEBUG, "get_adc_value start")
+    @log_on_error(logging.DEBUG, "get_adc_value error")
+    @log_on_end(logging.DEBUG, "get_adc_value end")
     def get_adc_value(self):
         adc_value_list = []
         adc_value_list.append(self.S0.read())
@@ -97,23 +122,37 @@ class picarxClass():
         adc_value_list.append(self.S2.read())
         return adc_value_list
 
+    @log_on_start(logging.DEBUG, "set_power start")
+    @log_on_error(logging.DEBUG, "set_power error")
+    @log_on_end(logging.DEBUG, "set_power end")
     def set_power(self, speed):
         self.set_motor_speed(1, speed)
         self.set_motor_speed(2, speed)
 
+    @log_on_start(logging.DEBUG, "backward start")
+    @log_on_error(logging.DEBUG, "backward error")
+    @log_on_end(logging.DEBUG, "backward end")
     def backward(self, speed):
         self.set_motor_speed(1, speed)
         self.set_motor_speed(2, speed)
 
+    @log_on_start(logging.DEBUG, "forward start")
+    @log_on_error(logging.DEBUG, "forward error")
+    @log_on_end(logging.DEBUG, "forward end")
     def forward(self, speed):
         self.set_motor_speed(1, -1*speed)
         self.set_motor_speed(2, -1*speed)
 
+    @log_on_start(logging.DEBUG, "stop start")
+    @log_on_error(logging.DEBUG, "stop error")
+    @log_on_end(logging.DEBUG, "stop end")
     def stop(self):
         self.set_motor_speed(1, 0)
         self.set_motor_speed(2, 0)
 
-
+    @log_on_start(logging.DEBUG, "Get_distance start")
+    @log_on_error(logging.DEBUG, "Get_distance error")
+    @log_on_end(logging.DEBUG, "Get_distance end")
     def Get_distance(self):
         timeout=0.01
         trig = Pin('D8')
@@ -140,6 +179,9 @@ class picarxClass():
         #print(cm)
         return cm
 
+    @log_on_start(logging.DEBUG, "test start")
+    @log_on_error(logging.DEBUG, "test error")
+    @log_on_end(logging.DEBUG, "test end")
     def test(self):
         # dir_servo_angle_calibration(-10)
         self.set_dir_servo_angle(-40)
