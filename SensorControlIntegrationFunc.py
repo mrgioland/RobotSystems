@@ -14,11 +14,12 @@ import picarxClass as pc
 
 def SCI():
     interClass = InterpreterClass(1100)
+    pc.picarxClass().forward(10)
+
     while True:
         reading = sc.SenseClass().sensor_reading()
         pos = -1*interClass.getDirection(reading)
         ang = cc.ControllerClass().Control(pos)
-        pc.picarxClass().forward(10)
 
     return 1
 
