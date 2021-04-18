@@ -64,6 +64,8 @@ class InterpreterClass():
         elif value == [0, 0, 0]:
             direction = 'OUT'
             pos = 1.1
+        else:
+            pos=0
 
         return pos
 
