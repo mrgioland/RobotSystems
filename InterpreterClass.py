@@ -66,6 +66,7 @@ class InterpreterClass():
             pos = 1.1
 
         print(greyscale)
+        print(value)
         return pos
 
     def test(self):
