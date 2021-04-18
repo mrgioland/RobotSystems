@@ -27,7 +27,7 @@ class ControllerClass():
         self.scaling = scaling
 
     def Control(self, modifier):
-        ang = 20 * modifier
+        ang = 30 * modifier
         pc.picarxClass().set_dir_servo_angle(ang)
         return ang
 

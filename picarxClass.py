@@ -36,7 +36,7 @@ class picarxClass():
         self.S2 = ADC('A2')
 
         self.Servo_dir_flag = 1
-        self.dir_cal_value = 0
+        self.dir_cal_value = 10
         self.cam_cal_value_1 = 0
         self.cam_cal_value_2 = 0
         self.motor_direction_pins = [self.left_rear_dir_pin, self.right_rear_dir_pin]
