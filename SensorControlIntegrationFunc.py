@@ -16,11 +16,12 @@ def SCI():
     while True:
         reading = sc.SenseClass().sensor_reading()
         print(reading)
-        pos = interClass.getDirection(reading)
+        pos = -1*interClass.getDirection(reading)
         print(pos)
         ang = cc.ControllerClass().Control(pos)
         print(ang)
         print('   ')
+        sys.exit()
 
 
     return 1
