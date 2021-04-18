@@ -11,6 +11,7 @@ import atexit
 from logdecorator import log_on_start, log_on_end, log_on_error
 import math
 import sys
+import logging
 
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
