@@ -20,7 +20,7 @@ def SCI():
         print(pos)
         ang = cc.ControllerClass().Control(pos)
         print(ang)
-        print()
+        print('   ')
 
 
     return 1
