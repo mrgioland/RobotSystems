@@ -12,21 +12,28 @@ from InterpreterClass import InterpreterClass
 import picarxClass as pc
 
 
-def SCI():
+def photocellSCI():
     interClass = InterpreterClass(1100)
+    sensorc = sc.SenseClass()
+    contr = cc.ControllerClass()
+
     pc.picarxClass().forward(10)
 
     while True:
-        reading = sc.SenseClass().sensor_reading()
+        reading = sensorc.sensor_reading()
         pos = -1*interClass.getDirection(reading)
-        ang = cc.ControllerClass().Control(pos)
+        contr.Control(pos)
+        time.sleep(0.1)
 
-    return 1
+
+def cameraSCI():
+    a=1
+
 
 
 if __name__ == "__main__":
     a=1
-    SCI()
+    photocellSCI()
 
 
 
