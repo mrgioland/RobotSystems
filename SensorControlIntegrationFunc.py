@@ -12,12 +12,15 @@ from InterpreterClass import InterpreterClass
 
 
 def SCI():
-    interClass = InterpreterClass(40)
+    interClass = InterpreterClass(1100)
     while True:
         reading = sc.SenseClass().sensor_reading()
+        print(reading)
         pos = interClass.getDirection(reading)
+        print(pos)
         ang = cc.ControllerClass().Control(pos)
         print(ang)
+        print()
 
 
     return 1
