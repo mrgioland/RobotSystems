@@ -5,15 +5,15 @@ try:
     time.sleep(0.01)
 except ImportError:
     print("This  computer  does  not  appear  to be a PiCar -X system(/opt/ezblock  is not  present). Shadowing  hardware  callswith  substitute  functions ")
-    from  sim_ezblock  import *
+    from sim_ezblock import *
 import time
 import atexit
 from logdecorator import log_on_start, log_on_end, log_on_error
 import math
 
-logging_format = "%(asctime)s: %(message)s"
-logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
-logging.getLogger ().setLevel(logging.DEBUG)
+# logging_format = "%(asctime)s: %(message)s"
+# logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
+# logging.getLogger ().setLevel(logging.DEBUG)
 
 
 class SenseClass():
