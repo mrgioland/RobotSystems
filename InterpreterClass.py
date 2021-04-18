@@ -42,14 +42,6 @@ class InterpreterClass():
 
         #To set polarity to be dark, invert values
         if not self.polarity:
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
-            print("SOMETHING IS WRONG")
             value = [abs(x - 1) for x in value]
 
         #Determine direction to turn
@@ -73,8 +65,6 @@ class InterpreterClass():
             direction = 'OUT'
             pos = 1.1
 
-        print(greyscale)
-        print(value)
         return pos
 
     def test(self):
