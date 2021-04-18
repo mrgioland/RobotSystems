@@ -9,19 +9,16 @@ except ImportError:
 import SenseClass as sc
 import ControllerClass as cc
 from InterpreterClass import InterpreterClass
+import picarxClass as pc
 
 
 def SCI():
     interClass = InterpreterClass(1100)
     while True:
         reading = sc.SenseClass().sensor_reading()
-        print(reading)
         pos = -1*interClass.getDirection(reading)
-        print(pos)
         ang = cc.ControllerClass().Control(pos)
-        print(ang)
-        print('   ')
-
+        pc.picarxClass().forward(10)
 
     return 1
 
