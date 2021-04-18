@@ -36,7 +36,6 @@ class SenseClass():
 
 if __name__ == "__main__":
     tmp = SenseClass()
-    print('a')
     print(tmp.sensor_reading())
 
 

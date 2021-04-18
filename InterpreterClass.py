@@ -10,37 +10,21 @@ import time
 import atexit
 from logdecorator import log_on_start, log_on_end, log_on_error
 import math
+import sys
 
 logging_format = "%(asctime)s: %(message)s"
 logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%S")
 logging.getLogger ().setLevel(logging.DEBUG)
 
 class InterpreterClass():
-
-    def __init__(self,sensitivity=0.4, polarity=1):
+    def __init__(self,sensitivity=40, polarity=1):
         #light = 0, dark = 1
         self.sensitivity = sensitivity
         self.polarity = polarity
 
-    # def edgeDection(self, sensors):
-    #     l = sensors[0]
-    #     m = sensors[1]
-    #     r = sensors[2]
-    #
-    #     if self.polarity:
-    #         if l > r:
-    #             return 1 #turn left
-    #         else:
-    #             return -1 #turn right
-    #     else:
-    #         if l < r:
-    #             return 1 #turn left
-    #         else:
-    #             return -1 #turn right
-    #     return 1
-
     def getDirection(self, greyscale):
         #default to polarity=1, light
+
         if (greyscale[0]) <= self.sensitivity:
             Left = 1
         else:
@@ -56,7 +40,7 @@ class InterpreterClass():
         value = [Left, Mid, Right]
 
         #To set polarity to be dark, invert values
-        if ~self.polarity:
+        if not self.polarity:
             value = [abs(x - 1) for x in value]
 
         #Determine direction to turn
@@ -78,7 +62,7 @@ class InterpreterClass():
             pos = -0.5
         elif value == [0, 0, 0]:
             direction = 'OUT'
-            pos = 0.5
+            pos = 1.1
 
         return pos
 
