@@ -17,6 +17,7 @@ def SCI():
         reading = sc.SenseClass().sensor_reading()
         pos = interClass.getDirection(reading)
         ang = cc.ControllerClass().Control(pos)
+        print(ang)
 
 
     return 1
