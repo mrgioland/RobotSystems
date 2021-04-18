@@ -17,7 +17,7 @@ logging.basicConfig(format=logging_format, level=logging.INFO, datefmt ="%H:%M:%
 logging.getLogger ().setLevel(logging.DEBUG)
 
 class InterpreterClass():
-    def __init__(self,sensitivity=40, polarity=1):
+    def __init__(self,sensitivity=1100, polarity=1):
         #light = 0, dark = 1
         self.sensitivity = sensitivity
         self.polarity = polarity
