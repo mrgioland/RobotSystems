@@ -65,7 +65,7 @@ class InterpreterClass():
             direction = 'OUT'
             pos = 1.1
 
-        print(value)
+        print(greyscale)
         return pos
 
     def test(self):
