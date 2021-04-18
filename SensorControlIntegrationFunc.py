@@ -21,7 +21,6 @@ def SCI():
         ang = cc.ControllerClass().Control(pos)
         print(ang)
         print('   ')
-        sys.exit()
 
 
     return 1
