@@ -167,6 +167,8 @@ def cameraSCI():
     pc.picarxClass().forward(10)
     camera = cv2.VideoCapture(0)
 
+    print(camera)
+
     while True:
         _, img = camera.read()
         lane_lines = detect_lane(img)
