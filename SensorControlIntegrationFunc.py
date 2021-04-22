@@ -175,10 +175,12 @@ def cameraSCI():
 
         x_blue = lane_lines[0][0][0]
 
-        if x_blue < img.shape[1]/2:
+        if x_blue < img.shape[1]/2 - 10:
             pos = 20
-        else:
+        elif x_blue > img.shape[1]/2 + 10:
             pos = -20
+        else:
+            pos = 0
         contr.Control(pos)
         time.sleep(0.1)
 
