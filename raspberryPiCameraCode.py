@@ -1,30 +1,20 @@
-try:
-    from ezblock import *
-    from ezblock.__init__ import __reset_mcu__
-    __reset_mcu__()
-    time.sleep(0.01)
-except ImportError:
-    print("This  computer  does  not  appear  to be a PiCar -X system(/opt/ezblock  is not  present). Shadowing  hardware  callswith  substitute  functions ")
-    from  sim_ezblock  import *
-import SenseClass as sc
-import ControllerClass as cc
-from InterpreterClass import InterpreterClass
-import picarxClass as pc
-
 import cv2
-
-
-
 import sys
-sys.path.append(r'/opt/ezblock')
+# #!/usr/bin/python3
+# import sys
+# sys.path.append(r'/opt/ezblock')
 # from vilib import Vilib
 # from ezblock import WiFi
 
 # Vilib.camera_start(True)
 # Vilib.color_detect_switch(True)
 # Vilib.detect_color_name('red')
+# # WiFi().write('CN', 'MakerStarsHall', 'sunfounder')
 
-
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import logging
 
 def detect_edges(frame):
     # filter for blue lane lines
@@ -144,48 +134,25 @@ def detect_lane(frame):
 
     return lane_lines
 
-def photocellSCI():
-    interClass = InterpreterClass(1100)
-    sensorc = sc.SenseClass()
-    contr = cc.ControllerClass()
-
-    pc.picarxClass().forward(10)
-
-    while True:
-        reading = sensorc.sensor_reading()
-        pos = -1*interClass.getDirection(reading)
-        contr.Control(pos)
-        time.sleep(0.1)
 
 
-def cameraSCI():
-    a=1
-    interClass = InterpreterClass(1100)
-    sensorc = sc.SenseClass()
-    contr = cc.ControllerClass()
 
-    pc.picarxClass().forward(10)
-    camera = cv2.VideoCapture(0)
 
-    while True:
-        _, img = camera.read()
-        lane_lines = detect_lane(img)
-        # lane_lines_image = display_lines(img, lane_lines)
-        # print(lane_lines)
+frame = cv2.imread('C:/Users/nerd/Documents/OSU/Classes/ResearchRobotics/Week3/testimage.jpg')
+lane_lines = detect_lane(frame)
+lane_lines_image = display_lines(frame, lane_lines)
+# print(lane_lines)
 
-        x_blue = lane_lines[0][0][0]
+x_blue = lane_lines[0][0][0]
 
-        if x_blue < img.shape[1]/2:
-            pos = 20
-        else:
-            pos = -20
-        contr.Control(pos)
-        time.sleep(0.1)
+if x_blue < frame.shape[1]/2:
+    dir = 'right'
+else:
+    dir = 'left'
 
-if __name__ == "__main__":
-    a=1
-    # photocellSCI()
-    cameraSCI()
+
+# plt.imshow(lane_lines_image)
+# plt.show()
 
 
 
