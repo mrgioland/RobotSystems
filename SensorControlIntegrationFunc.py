@@ -154,6 +154,7 @@ def photocellSCI():
     while True:
         reading = sensorc.sensor_reading()
         pos = -1*interClass.getDirection(reading)
+        print(pos)
         contr.Control(pos)
         time.sleep(0.1)
 
@@ -166,8 +167,6 @@ def cameraSCI():
 
     pc.picarxClass().forward(10)
     camera = cv2.VideoCapture(0)
-
-    print(camera)
 
     while True:
         _, img = camera.read()
@@ -186,8 +185,8 @@ def cameraSCI():
 
 if __name__ == "__main__":
     a=1
-    # photocellSCI()
-    cameraSCI()
+    photocellSCI()
+    # cameraSCI()
 
 
 
