@@ -154,7 +154,6 @@ def photocellSCI():
     while True:
         reading = sensorc.sensor_reading()
         pos = -1*interClass.getDirection(reading)
-        print(pos)
         contr.Control(pos)
         time.sleep(0.1)
 
